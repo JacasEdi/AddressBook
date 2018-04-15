@@ -1,0 +1,106 @@
+<div class="form">
+  <form>
+    <mat-card>
+      <!--FIRST NAME FIELD-->
+      <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="First Name" [formControl]="firstNameFormControl"
+                 [errorStateMatcher]="matcher" name="firstname"
+                 [(ngModel)]="person.firstName">
+          <mat-error *ngIf="firstNameFormControl.hasError('pattern')">
+            Please enter your first name
+          </mat-error>
+          <mat-error *ngIf="firstNameFormControl.hasError('maxlength')">
+            Name is <strong>too long</strong>
+          </mat-error>
+          <mat-error *ngIf="firstNameFormControl.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--LAST NAME FIELD-->
+      <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Last Name" [formControl]="lastNameFormControl"
+                 [errorStateMatcher]="matcher" name="lastname"
+                 [(ngModel)]="person.lastName">
+          <mat-error *ngIf="lastNameFormControl.hasError('pattern')">
+            Please enter your last name
+          </mat-error>
+          <mat-error *ngIf="lastNameFormControl.hasError('maxlength')">
+            Name is <strong>too long</strong>
+          </mat-error>
+          <mat-error *ngIf="lastNameFormControl.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--ADDRESS FIELD-->
+      <div>
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Address" [formControl]="addressFormControl"
+                    [errorStateMatcher]="matcher" matTextareaAutosize matAutosizeMinRows="2"
+                    matAutosizeMaxRows="5" name="address"
+                    [(ngModel)]="person.address"></textarea>
+          <mat-error *ngIf="addressFormControl.hasError('maxlength')">
+            Address is <strong>too long</strong>
+          </mat-error>
+          <mat-error *ngIf="addressFormControl.hasError('required')">
+            Address is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--EMAIL FIELD-->
+      <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email (optional)" [formControl]="emailFormControl"
+                 [errorStateMatcher]="matcher" name="email"
+                 [(ngModel)]="person.email">
+          <mat-error *ngIf="emailFormControl.hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('maxlength')">
+            Email is <strong>too long</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--PHONE NUMBER FIELD-->
+      <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Phone number (optional)" [formControl]="phoneFormControl"
+                 [errorStateMatcher]="matcher" name="phone"
+                 [(ngModel)]="person.phone">
+          <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+            Please enter a valid phone number
+          </mat-error>
+          <mat-error *ngIf="phoneFormControl.hasError('maxlength')">
+            Phone number is <strong>too long</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--NOTE FIELD-->
+      <div>
+        <mat-form-field class="example-full-width">
+  <textarea matInput placeholder="Note" [formControl]="noteFormControl" matTextareaAutosize matAutosizeMinRows="2"
+            matAutosizeMaxRows="5" name="note"
+            [(ngModel)]="person.note"></textarea>
+          <mat-error *ngIf="noteFormControl.hasError('maxlength')">
+            Note is <strong>too long</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--BUTTON-->
+      <div>
+        <button mat-raised-button color="primary" class="save-button" id="button" (click)="onSave()">
+          <i class='fa fa-circle-o-notch fa-spin' id="spinner"></i> {{ saveButtonText }}
+        </button>
+      </div>
+    </mat-card>
+  </form>
+</div>

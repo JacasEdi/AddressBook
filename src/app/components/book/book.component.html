@@ -1,0 +1,15 @@
+<mat-card *ngFor="let person of people">
+  <mat-card-title>{{person.firstName}} {{person.lastName}}</mat-card-title>
+  <mat-card-content>Address: {{person.address}}</mat-card-content>
+  <mat-card-content>Email: {{person.email}}</mat-card-content>
+  <mat-card-content>Phone: {{person.phone}}</mat-card-content>
+  <mat-card-content>Note: {{person.note}}</mat-card-content>
+  <mat-card-actions>
+    <button (click)="editPerson(person)" mat-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="deletePerson(person)" mat-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
