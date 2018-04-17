@@ -1,0 +1,27 @@
+[debug] [2018-04-17T11:59:18.044Z] ----------------------------------------------------------------------
+[debug] [2018-04-17T11:59:18.044Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\jacek\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase open
+[debug] [2018-04-17T11:59:18.044Z] CLI Version:   3.18.4
+[debug] [2018-04-17T11:59:18.044Z] Platform:      win32
+[debug] [2018-04-17T11:59:18.044Z] Node Version:  v8.9.3
+[debug] [2018-04-17T11:59:18.044Z] Time:          Tue Apr 17 2018 12:59:18 GMT+0100 (GMT Summer Time)
+[debug] [2018-04-17T11:59:18.044Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-17T11:59:18.060Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-04-17T11:59:18.060Z] > authorizing via signed-in user
+[debug] [2018-04-17T11:59:18.060Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-04-17T11:59:18.060Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/0-30uir2wYr8qtijIcjIk8J7ccBUhm32EGDdBOiaTZk',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Apr 17 2018 12:59:18 GMT+0100 (GMT Summer Time)
+[debug] [2018-04-17T11:59:18.287Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T11:59:18.309Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/addressbook-2f0aa  
+  
+ Tue Apr 17 2018 12:59:18 GMT+0100 (GMT Summer Time)
+[debug] [2018-04-17T11:59:18.978Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-17T11:59:18.978Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/addressbook-2f0aa/tokens  
+  
+ Tue Apr 17 2018 12:59:18 GMT+0100 (GMT Summer Time)
+[debug] [2018-04-17T11:59:19.509Z] <<< HTTP RESPONSE 200
