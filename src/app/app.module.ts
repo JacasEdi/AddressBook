@@ -4,6 +4,7 @@ import {environment} from '../environments/environment';
 import 'hammerjs';
 
 import {AppComponent} from './app.component';
+import {HeaderComponent} from './components/header/header.component';
 import {BookComponent} from './components/book/book.component';
 import {PersonComponent} from './components/person/person.component';
 import {OrganisationComponent} from './components/organisation/organisation.component';
@@ -54,15 +55,16 @@ import {
 const appRoutes: Routes = [
   {path: '', component: BookComponent},
   {path: 'person', component: PersonComponent},
-  {path: 'person/:id', component: PersonComponent}
+  {path: 'organisation', component: OrganisationComponent},
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     BookComponent,
     PersonComponent,
-    OrganisationComponent
+    OrganisationComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FirebaseService} from '../../services/firebase.service';
 import {Router} from '@angular/router';
+import {Organisation} from '../../models/Organisation';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -21,27 +23,30 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class PersonComponent implements OnInit {
   person: Person;
+  organisations: Organisation[];
+
   options: FormGroup;
   matcher = new MyErrorStateMatcher();
+
   saveButtonText = 'Save';
   spinner: any;
   isEdited = false;
 
-  // tracks the value and validation status of the name input field in the form
+  // tracks the value and validation status of the first name input field in the form
   firstNameFormControl = new FormControl('', [
     Validators.required,
     Validators.maxLength(50),
     Validators.pattern('[a-zA-Z][a-zA-Z ]*')
   ]);
 
-  // tracks the value and validation status of the name input field in the form
+  // tracks the value and validation status of the last name input field in the form
   lastNameFormControl = new FormControl('', [
     Validators.required,
     Validators.maxLength(50),
     Validators.pattern('[a-zA-Z][a-zA-Z ]*')
   ]);
 
-  // tracks the value and validation status of the name input field in the form
+  // tracks the value and validation status of the address input field in the form
   addressFormControl = new FormControl('', [
     Validators.required,
     Validators.maxLength(100),
@@ -59,17 +64,23 @@ export class PersonComponent implements OnInit {
     Validators.pattern('^([+]?\\d{1,2}[-\\s]?|)\\d{3}[-\\s]?\\d{3}[-\\s]?\\d{4}$'),
   ]);
 
-  // tracks the value message text area in the form
+  // tracks the value of the note text area in the form
   noteFormControl = new FormControl('', [
     Validators.maxLength(200)
   ]);
 
   constructor(fb: FormBuilder,
               private firebaseService: FirebaseService,
+              private firebase: AngularFireDatabase,
               private router: Router) {
     this.options = fb.group({
       hideRequired: false,
       floatLabel: 'auto',
+    });
+
+    firebase.list<Organisation>('organisations').valueChanges().subscribe(value => {
+      console.log(value);
+      this.organisations = value;
     });
   }
 
@@ -79,8 +90,9 @@ export class PersonComponent implements OnInit {
     this.spinner = document.getElementById('spinner');
     this.spinner.hidden = true;
 
-    if (this.firebaseService.person != null) {
-      this.person = this.firebaseService.person;
+    // person is being edited
+    if (this.firebaseService.editedPerson != null) {
+      this.person = this.firebaseService.editedPerson;
       this.isEdited = true;
     }
   }
@@ -96,11 +108,11 @@ export class PersonComponent implements OnInit {
     tmpPerson.address = this.person.address;
     tmpPerson.email = this.person.email;
     tmpPerson.phone = this.person.phone;
+    tmpPerson.organisation = this.person.organisation;
     tmpPerson.note = this.person.note;
 
-    console.log('Edited? ' + this.isEdited);
-    console.log('Person id in person component: ' + tmpPerson.id);
-    this.isEdited ? this.firebaseService.updatePerson(tmpPerson) : this.firebaseService.addPerson(tmpPerson);
+    this.isEdited ? this.firebaseService.updatePerson(tmpPerson) :
+      this.firebaseService.addPerson(tmpPerson);
 
     this.onSaveSuccessful();
   }
@@ -110,11 +122,13 @@ export class PersonComponent implements OnInit {
     this.saveButtonText = 'Send';
     this.spinner.hidden = true;
 
+    this.person.id = '';
     this.person.firstName = '';
     this.person.lastName = '';
     this.person.address = '';
     this.person.email = '';
     this.person.phone = null;
+    this.person.organisation = null;
     this.person.note = '';
 
     this.firstNameFormControl.reset();

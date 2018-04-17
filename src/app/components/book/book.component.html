@@ -1,15 +1,62 @@
-<mat-card *ngFor="let person of people">
-  <mat-card-title>{{person.firstName}} {{person.lastName}}</mat-card-title>
-  <mat-card-content>Address: {{person.address}}</mat-card-content>
-  <mat-card-content>Email: {{person.email}}</mat-card-content>
-  <mat-card-content>Phone: {{person.phone}}</mat-card-content>
-  <mat-card-content>Note: {{person.note}}</mat-card-content>
-  <mat-card-actions>
-    <button (click)="editPerson(person)" mat-button>
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button (click)="deletePerson(person)" mat-button>
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
+<mat-tab-group>
+  <mat-tab label="People">
+    <mat-card *ngFor="let person of people">
+      <mat-card-title>{{person.lastName}} {{person.firstName}}</mat-card-title>
+      <mat-label *ngIf="person.address">Address</mat-label>
+      <mat-card-content *ngIf="person.address"
+                        [innerHTML]="person.address.split('\n').join('<br/>')"></mat-card-content>
+      <mat-label>Email</mat-label>
+      <mat-card-content>{{person.email}}</mat-card-content>
+      <mat-label>Phone</mat-label>
+      <mat-card-content>{{person.phone}}</mat-card-content>
+      <mat-label *ngIf="person.organisation">Organisation</mat-label>
+      <mat-card-content *ngIf="person.organisation">{{person.organisation.name}}</mat-card-content>
+      <mat-label *ngIf="person.note">Note</mat-label>
+      <mat-card-content *ngIf="person.note" [innerHTML]="person.note.split('\n').join('<br/>')"></mat-card-content>
+
+      <mat-card-actions>
+        <button (click)="editPerson(person)" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deletePerson(person)" mat-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Organisations">
+    <mat-card *ngFor="let organisation of organisations">
+      <mat-card-title>{{organisation.name}}</mat-card-title>
+      <mat-label *ngIf="organisation.address">Address</mat-label>
+      <mat-card-content *ngIf="organisation.address"
+                        [innerHTML]="organisation.address.split('\n').join('<br/>')"></mat-card-content>
+      <mat-label>Email</mat-label>
+      <mat-card-content>{{organisation.email}}</mat-card-content>
+      <mat-label>Phone</mat-label>
+      <mat-card-content>{{organisation.phone}}</mat-card-content>
+      <mat-label>People</mat-label>
+      <mat-card-content class="people" *ngFor="let p of organisation.people">{{p.lastName}} {{p.firstName}}
+        <button (click)="removePerson(organisation, p)" mat-button>
+          <mat-icon>remove</mat-icon>
+        </button>
+      </mat-card-content>
+      <mat-card-content></mat-card-content>
+      <mat-label *ngIf="organisation.note">Note</mat-label>
+      <mat-card-content *ngIf="organisation.note"
+                        [innerHTML]="organisation.note.split('\n').join('<br/>')"></mat-card-content>
+
+      <mat-card-actions>
+        <button (click)="editOrganisation(organisation)" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteOrganisation(organisation)" mat-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+  </mat-tab>
+
+</mat-tab-group>

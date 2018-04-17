@@ -5,11 +5,9 @@ export class Organisation {
   address: string;
   phone: number;
   email: string;
-  people: Person[];
+  note?: string;
+  people?: Person[];
 
-  constructor(name: string, address: string) {
-    this.name = name;
-    this.address = address;
-  }
+  constructor() {}
 }
 

@@ -83,6 +83,21 @@
         </mat-form-field>
       </div>
 
+      <!--ORGANISATION FIELD-->
+      <div>
+        <mat-form-field class="example-full-width"
+                        [hideRequiredMarker]="options.value.hideRequired"
+                        [floatLabel]="options.value.floatLabel">
+          <mat-select name="organisation" [(ngModel)]="person.organisation">
+            <mat-option value="">none</mat-option>
+            <mat-option *ngFor="let organisation of organisations"
+                        [value]="organisation">{{ organisation.name }}
+            </mat-option>
+          </mat-select>
+          <mat-placeholder>Organisation</mat-placeholder>
+        </mat-form-field>
+      </div>
+
       <!--NOTE FIELD-->
       <div>
         <mat-form-field class="example-full-width">

@@ -1,4 +1,4 @@
-import { Organisation } from './Organisation';
+import {Organisation} from './Organisation';
 
 export class Person {
   id: string;
@@ -10,5 +10,6 @@ export class Person {
   organisation?: Organisation;
   note?: string;
 
-  constructor() {}
+  constructor() {
+  }
 }
